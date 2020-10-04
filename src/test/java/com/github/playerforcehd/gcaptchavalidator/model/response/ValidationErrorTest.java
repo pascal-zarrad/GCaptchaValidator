@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * @since 3.0.0
  */
 public class ValidationErrorTest {
-    @Test(dataProvider = "getValidationErrorByCodeDataProvider")
+    @Test(dataProvider = "validationErrorByCodeDataProvider")
     public void testGetValidationErrorByCode(String testError, ValidationError expectedError) {
         ValidationError actualError = ValidationError.getValidationErrorByCode(testError);
 
@@ -19,7 +19,7 @@ public class ValidationErrorTest {
     }
 
     @DataProvider
-    public Object[][] getValidationErrorByCodeDataProvider() {
+    public Object[][] validationErrorByCodeDataProvider() {
         return new Object[][] {
             {"missing-input-secret", ValidationError.MISSING_INPUT_SECRET},
             {"invalid-input-secret", ValidationError.INVALID_INPUT_SECRET},
