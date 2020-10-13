@@ -35,7 +35,7 @@ public class ValidatorConfigurationTest {
 
     @Test
     public void testCreateVerifierConfigurationWithSecretToken() {
-        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.createVerifierConfiguration(
+        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.create(
             this.expectedSecretToken
         );
 
@@ -48,7 +48,7 @@ public class ValidatorConfigurationTest {
 
     @Test
     public void testCreateVerifierConfigurationWithSecretTokenAndVersion() {
-        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.createVerifierConfiguration(
+        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.create(
             this.expectedSecretToken,
             this.expectedReCaptchaVersion
         );
@@ -62,7 +62,7 @@ public class ValidatorConfigurationTest {
 
     @Test
     public void testCreateVerifierConfigurationWithSecretTokenAndVersionAndVerificationUrl() {
-        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.createVerifierConfiguration(
+        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.create(
             this.expectedSecretToken,
             this.expectedReCaptchaVersion,
             this.expectedVerificationUrl
@@ -77,7 +77,7 @@ public class ValidatorConfigurationTest {
 
     @Test
     public void testCreateVerifierConfigurationWithSecretTokenAndVersionAndVerificationUrlAndHttpHeaders() {
-        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.createVerifierConfiguration(
+        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.create(
             this.expectedSecretToken,
             this.expectedReCaptchaVersion,
             this.expectedVerificationUrl,
@@ -93,7 +93,7 @@ public class ValidatorConfigurationTest {
 
     @Test
     public void testCreateVerifierConfigurationWithExplicitMutable() {
-        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.createVerifierConfiguration(
+        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.create(
             "SomeOtherDummy",
             ValidatorConfiguration.DEFAULT_VERSION,
             ValidatorConfiguration.DEFAULT_VERIFICATION_URL,
@@ -115,7 +115,7 @@ public class ValidatorConfigurationTest {
 
     @Test(expectedExceptions = { UnsupportedOperationException.class })
     public void testCreateVerifierConfigurationWithExplicitImmutable() throws UnsupportedOperationException {
-        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.createVerifierConfiguration(
+        ValidatorConfiguration actualConfiguration = ValidatorConfiguration.create(
             this.expectedSecretToken,
             this.expectedReCaptchaVersion,
             this.expectedVerificationUrl,

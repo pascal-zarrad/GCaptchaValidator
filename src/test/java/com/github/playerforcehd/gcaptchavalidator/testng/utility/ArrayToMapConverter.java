@@ -38,7 +38,8 @@ public class ArrayToMapConverter {
 
     /**
      * Convert an two dimensional array to a map.
-     * Makes it easier
+     * Makes it easier to test methods that use nested data using maps,
+     * as data providers can be created far easier.
      *
      * @param data The data to convert
      * @return The map that contains the data

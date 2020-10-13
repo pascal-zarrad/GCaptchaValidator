@@ -30,7 +30,7 @@ public interface ValidationRequest extends Serializable {
      * @param response The response of the client to set on the request
      * @return The created basic validation request that has been created
      */
-    static ValidationRequest createValidationRequest(String response) {
+    static ValidationRequest create(String response) {
         return new BasicValidationRequest(response, "", new HashMap<>());
     }
 
@@ -41,7 +41,7 @@ public interface ValidationRequest extends Serializable {
      * @param remoteIP The remote IP of the client that send the response
      * @return The created basic validation request that has been created
      */
-    static ValidationRequest createValidationRequest(String response, String remoteIP) {
+    static ValidationRequest create(String response, String remoteIP) {
         return new BasicValidationRequest(response, remoteIP, new HashMap<>());
     }
 
@@ -53,7 +53,7 @@ public interface ValidationRequest extends Serializable {
      * @param additionalParameters The additional parameters to set on the request
      * @return The created basic validation request that has been created
      */
-    static ValidationRequest createValidationRequest(
+    static ValidationRequest create(
         String response,
         String remoteIP,
         Map<String, Object> additionalParameters

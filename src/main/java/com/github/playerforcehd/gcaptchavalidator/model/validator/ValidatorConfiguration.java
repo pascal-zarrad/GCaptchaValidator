@@ -45,7 +45,7 @@ public interface ValidatorConfiguration extends Serializable {
      * @param secretToken The secret token to configure
      * @return The created verifier configuration instance
      */
-    static ValidatorConfiguration createVerifierConfiguration(String secretToken) {
+    static ValidatorConfiguration create(String secretToken) {
         return new MutableValidatorConfiguration(
             secretToken,
             DEFAULT_VERSION,
@@ -61,7 +61,7 @@ public interface ValidatorConfiguration extends Serializable {
      * @param reCaptchaVersion The targeted ReCaptcha version
      * @return The created verifier configuration instance
      */
-    static ValidatorConfiguration createVerifierConfiguration(String secretToken, ReCaptchaVersion reCaptchaVersion) {
+    static ValidatorConfiguration create(String secretToken, ReCaptchaVersion reCaptchaVersion) {
         return new MutableValidatorConfiguration(
             secretToken,
             reCaptchaVersion,
@@ -78,7 +78,7 @@ public interface ValidatorConfiguration extends Serializable {
      * @param verifierUrl The URL where requests should be send to
      * @return The created verifier configuration instance
      */
-    static ValidatorConfiguration createVerifierConfiguration(
+    static ValidatorConfiguration create(
         String secretToken,
         ReCaptchaVersion reCaptchaVersion,
         String verifierUrl
@@ -100,7 +100,7 @@ public interface ValidatorConfiguration extends Serializable {
      * @param httpHeaders The HTTP headers to sent when using thi configuration
      * @return The created verifier configuration instance
      */
-    static ValidatorConfiguration createVerifierConfiguration(
+    static ValidatorConfiguration create(
         String secretToken,
         ReCaptchaVersion reCaptchaVersion,
         String verifierUrl,
@@ -123,7 +123,7 @@ public interface ValidatorConfiguration extends Serializable {
      * @param httpHeaders The HTTP headers to sent when using thi configuration
      * @return The created verifier configuration instance
      */
-    static ValidatorConfiguration createVerifierConfiguration(
+    static ValidatorConfiguration create(
         String secretToken,
         ReCaptchaVersion reCaptchaVersion,
         String verifierUrl,

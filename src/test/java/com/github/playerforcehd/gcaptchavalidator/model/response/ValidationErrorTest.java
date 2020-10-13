@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * @since 3.0.0
  */
 public class ValidationErrorTest {
-    @Test(dataProvider = "validationErrorByCodeDataProvider")
+    @Test(dataProvider = "getValidationErrorByCodeDataProvider")
     public void testGetValidationErrorByCode(String testError, ValidationError expectedError) {
         ValidationError actualError = ValidationError.getValidationErrorByCode(testError);
 
@@ -19,7 +19,7 @@ public class ValidationErrorTest {
     }
 
     @DataProvider
-    public Object[][] validationErrorByCodeDataProvider() {
+    public Object[][] getValidationErrorByCodeDataProvider() {
         return new Object[][] {
             {"missing-input-secret", ValidationError.MISSING_INPUT_SECRET},
             {"invalid-input-secret", ValidationError.INVALID_INPUT_SECRET},
@@ -28,5 +28,12 @@ public class ValidationErrorTest {
             {"bad-request", ValidationError.BAD_REQUEST},
             {"timeout-or-duplicate", ValidationError.TIMEOUT_OR_DUPLICATE}
         };
+    }
+
+    @Test
+    public void testGetValidationErrorByCodeWithInvalidCode() {
+        ValidationError actualError = ValidationError.getValidationErrorByCode("SomeTestError");
+
+        Assert.assertNull(actualError);
     }
 }

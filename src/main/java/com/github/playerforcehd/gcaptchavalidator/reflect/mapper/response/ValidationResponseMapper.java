@@ -2,6 +2,7 @@ package com.github.playerforcehd.gcaptchavalidator.reflect.mapper.response;
 
 import com.github.playerforcehd.gcaptchavalidator.exception.mapper.DataMappingException;
 import com.github.playerforcehd.gcaptchavalidator.model.response.ClientType;
+import com.github.playerforcehd.gcaptchavalidator.model.response.ValidationError;
 import com.github.playerforcehd.gcaptchavalidator.reflect.mapper.Mapper;
 
 import java.util.HashMap;
@@ -79,11 +80,6 @@ public class ValidationResponseMapper implements Mapper<Map<String, Object>, Map
     };
 
     /**
-     * The name of the additional data field where unknown data is put to
-     */
-    private static final String ADDITIONAL_DATA_MAPPING = "additionalData";
-
-    /**
      * The singleton instance of the {@link ValidationResponseMapper}
      */
     private static ValidationResponseMapper INSTANCE;
@@ -127,9 +123,6 @@ public class ValidationResponseMapper implements Mapper<Map<String, Object>, Map
 
         // Mapping for errors
         this.mapErrors(input, output);
-
-        // Put unknown fields into additional data
-        this.mapAdditionalData(input, output);
 
         return output;
     }
@@ -202,29 +195,19 @@ public class ValidationResponseMapper implements Mapper<Map<String, Object>, Map
      */
     private void mapErrors(Map<String, Object> input, Map<String, Object> output) {
         if (input.containsKey(ValidationResponseMapper.ERRORS_RESPONSE_FIELD)) {
-            output.put(
-                ValidationResponseMapper.ERRORS_MAPPING_FIELD,
-                input.get(ValidationResponseMapper.ERRORS_RESPONSE_FIELD)
-            );
-        }
-    }
+            if (input.get(ValidationResponseMapper.ERRORS_RESPONSE_FIELD) instanceof String[]) {
+                String[] rawErrors = (String[]) input.get(ValidationResponseMapper.ERRORS_RESPONSE_FIELD);
+                ValidationError[] errors = new ValidationError[rawErrors.length];
 
-    /**
-     * Map all leftover keys to the additional data map
-     *
-     * @param input The input to map
-     * @param output The output to map
-     */
-    private void mapAdditionalData(Map<String, Object> input, Map<String, Object> output) {
-        Map<String, Object> additionalData = new HashMap<>();
-        input.forEach((key, value) -> {
-            for (String knownResponseField : ValidationResponseMapper.KNOWN_RESPONSE_FIELDS) {
-                if (knownResponseField.equals(key)) {
-                    return;
+                for (int i = 0; i < rawErrors.length; i++) {
+                    errors[i] = ValidationError.getValidationErrorByCode(rawErrors[i]);
                 }
-                additionalData.put(key, value);
+
+                output.put(
+                    ValidationResponseMapper.ERRORS_MAPPING_FIELD,
+                    errors
+                );
             }
-        });
-        output.put(ValidationResponseMapper.ADDITIONAL_DATA_MAPPING, additionalData);
+        }
     }
 }

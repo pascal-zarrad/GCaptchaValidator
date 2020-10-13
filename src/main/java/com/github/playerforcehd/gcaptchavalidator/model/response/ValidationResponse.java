@@ -2,8 +2,6 @@ package com.github.playerforcehd.gcaptchavalidator.model.response;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Represents a single response of a request that was send to the siteverify servers.
@@ -34,8 +32,6 @@ import java.util.Map;
  *   - If both values are available, the response won't happen as the request will have been failed
  *     with an exception as the mapping cannot be applied.
  *
- * Also if some additional information is being defined later on, it will end up in the additional data.
- *
  * An instantiated {@link ValidationResponse} is immutable.
  *
  * @author Pascal Zarrad
@@ -53,49 +49,19 @@ public interface ValidationResponse extends Serializable {
      * @param errors The errors returned by a failed validation
      * @return The created {@link ValidationResponse}
      */
-    static ValidationResponse createValidationResponse(
+    static ValidationResponse create(
         boolean succeeded,
         Date challengeTimestamp,
         ClientType clientType,
         String hostnameOrPackageName,
         ValidationError[] errors
     ) {
-        return new ImmutableResponse(
+        return new SiteVerifyResponse(
             succeeded,
             challengeTimestamp,
             clientType,
             hostnameOrPackageName,
-            errors,
-            new HashMap<>()
-        );
-    }
-
-    /**
-     * Create a new immutable validation response
-     *
-     * @param succeeded The state if the validation returned a positive result
-     * @param challengeTimestamp The time when the challenge has been loaded
-     * @param clientType The type of the client that requested the validation
-     * @param hostnameOrPackageName The hostname/ip or package name of the client
-     * @param validationErrors The errors returned by a failed validation
-     * @param additionalData The data that couldn't be mapped to the existing fields
-     * @return The created {@link ValidationResponse}
-     */
-    static ValidationResponse createValidationResponse(
-        boolean succeeded,
-        Date challengeTimestamp,
-        ClientType clientType,
-        String hostnameOrPackageName,
-        ValidationError[] validationErrors,
-        Map<String, Object> additionalData
-    ) {
-        return new ImmutableResponse(
-            succeeded,
-            challengeTimestamp,
-            clientType,
-            hostnameOrPackageName,
-            validationErrors,
-            additionalData
+            errors
         );
     }
 
@@ -137,15 +103,4 @@ public interface ValidationResponse extends Serializable {
      * @return The errors that are set on the response
      */
     ValidationError[] getErrors();
-
-    /**
-     * Get the data that has been send additionally - if there is some.
-     * All values that cannot be mapped to the available predefined values
-     * of this standardized response type will be put into the additional data map.
-     *
-     * The values can either be primitive or another Map&gt;String, Object&lt;.
-     *
-     * @return A map containing data that does not belong to standardized response keys
-     */
-    Map<String, Object> getAdditionalData();
 }

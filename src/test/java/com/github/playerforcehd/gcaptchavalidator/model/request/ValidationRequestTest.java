@@ -38,7 +38,7 @@ public class ValidationRequestTest {
 
     @Test
     public void testCreateWithResponse() {
-        ValidationRequest actualValidationRequest = ValidationRequest.createValidationRequest(this.expectedResponse);
+        ValidationRequest actualValidationRequest = ValidationRequest.create(this.expectedResponse);
 
         Assert.assertTrue(actualValidationRequest instanceof BasicValidationRequest);
         Assert.assertEquals(actualValidationRequest.getResponse(), this.expectedResponse);
@@ -48,7 +48,7 @@ public class ValidationRequestTest {
 
     @Test
     public void testCreateWithResponseAndRemoteIp() {
-        ValidationRequest actualValidationRequest = ValidationRequest.createValidationRequest(
+        ValidationRequest actualValidationRequest = ValidationRequest.create(
             this.expectedResponse,
             this.expectedRemoteIP
         );
@@ -61,7 +61,7 @@ public class ValidationRequestTest {
 
     @Test
     public void testCreateWithResponseAndRemoteIpAndAdditionalParameters() {
-        ValidationRequest actualValidationRequest = ValidationRequest.createValidationRequest(
+        ValidationRequest actualValidationRequest = ValidationRequest.create(
             this.expectedResponse,
             this.expectedRemoteIP,
             this.expectedAdditionalParameters
